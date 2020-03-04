@@ -16,7 +16,6 @@ from basicfunctions import GetCredentials
 # https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-SpecifiedHostname = 'WIN10-CLOUD-1'
 
 # Retrieve credential information from credentials.json
 credentials = GetCredentials()
@@ -30,8 +29,11 @@ productAgentAPIPath = '/WebApp/API/AgentResource/ProductAgents'
 # currently Canonical-Request-Headers will always be empty
 canonicalRequestHeaders = ''
 
+SpecifiedHostname = ''
+
 # Get endpoint by name to query
-GetEndpoint(SpecifiedHostname)
+while SpecifiedHostname == '':
+    SpecifiedHostname = GetEndpoint(SpecifiedHostname)
 
 
 # This sample sends a get request to obtain agent info
