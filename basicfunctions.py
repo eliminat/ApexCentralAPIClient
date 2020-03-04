@@ -22,9 +22,3 @@ def BasicOutput(r):
     print(r.json()['result_content'])  #TODO Break-down results from the JSON output.
     print('')
 
-# Retrieve credential information from credentials.json
-# TODO Allow specification of JSON file instead of hard-code?
-def GetCredentials():
-    with open('credentials.json', 'r') as f:
-        credentials = json.load(f)
-    return credentials
