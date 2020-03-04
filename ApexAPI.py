@@ -4,6 +4,7 @@ import requests
 import time
 import json
 import urllib3
+import sys
 from setupapi import *
 from basicfunctions import *
 
@@ -19,8 +20,24 @@ useRequestBody = ''
 # https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+print('')
 
-useQueryString = QuerySelection()
+choice = ''
+while choice == '':
+    print('Do you want to perform a (Q)uery or an (A)ction? ')
+    print('')
+    choice = input()
+    print(choice)
+    if (choice.lower() != 'q') and (choice.lower() != 'a'):
+        choice = ''
+
+if choice.lower() == 'q':
+    useQueryString = QuerySelection()
+elif choice.lower() == 'a':
+    print('Not yet implemented')
+    sys.exit()
+
+
 
 # Header information for requests
 #headers = {'Authorization': 'Bearer ' + jwt_token}

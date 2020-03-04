@@ -16,12 +16,10 @@ def BasicOutput(r):
     print('')
     status = "Status Code: {} - {}"
     print(status.format(r.status_code,r.json()['result_description']))
-    #print(r.status_code)
-    #print(r.json()['result_code'])
-    #print(r.json()['result_description'])
     print(r.json()['result_content'])  #TODO Break-down results from the JSON output.
     print('')
 
+# Prompt for what type of query should be performed.
 def QuerySelection():
     print('')
     print('What would you like to do?')
