@@ -1,10 +1,12 @@
 import json
 
 # Get endpoint name from console
-def GetEndpoint(SpecifiedHostname): #TODO Allow multiple endpoints to be entered into an array
-    print("Provide endpoint name: ")
-    SpecifiedHostname = input() #TODO Add input checking/verification
-    confirmation = 'The Hostname {} was provided'
+def GetEndpoint(): #TODO Allow multiple endpoints to be entered into an array
+    SpecifiedHostname = ''
+    while SpecifiedHostname == '':
+        print("Provide endpoint name: ")
+        SpecifiedHostname = input() #TODO Add input checking/verification
+    confirmation = 'The Hostname \"{}\" was provided'
     print('')
     print(confirmation.format(SpecifiedHostname))
     return SpecifiedHostname

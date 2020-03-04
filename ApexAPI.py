@@ -29,11 +29,8 @@ productAgentAPIPath = '/WebApp/API/AgentResource/ProductAgents'
 # currently Canonical-Request-Headers will always be empty
 canonicalRequestHeaders = ''
 
-SpecifiedHostname = ''
-
 # Get endpoint by name to query
-while SpecifiedHostname == '':
-    SpecifiedHostname = GetEndpoint(SpecifiedHostname)
+SpecifiedHostname = GetEndpoint()
 
 
 # This sample sends a get request to obtain agent info
