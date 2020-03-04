@@ -12,20 +12,15 @@ CREDENTIALS = GetCredentials()
 # This is the path for ProductAgents API
 PRODUCTAGENTAPIPATH = '/WebApp/API/AgentResource/ProductAgents'
 
+useQueryString = ''
+useRequestBody = ''
+
 # Disable warning from Python that HTTPS is Unverified.
 # https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-# Get endpoint by name to query
-SpecifiedHostname = GetEndpoint()
-
-
-# This Query sends a get request to obtain agent info
-QueryString = "?host_name={}"
-useQueryString = QueryString.format(SpecifiedHostname)
-useRequestBody = ''
-
+useQueryString = QuerySelection()
 
 # Header information for requests
 #headers = {'Authorization': 'Bearer ' + jwt_token}
