@@ -1,7 +1,7 @@
 import json
 
 # Get endpoint name from console
-def get_endpoint(SpecifiedHostname): #TODO Allow multiple endpoints to be entered into an array
+def GetEndpoint(SpecifiedHostname): #TODO Allow multiple endpoints to be entered into an array
     print("Provide endpoint name: ")
     SpecifiedHostname = input() #TODO Add input checking/verification
     confirmation = 'The Hostname {} was provided'
@@ -10,7 +10,7 @@ def get_endpoint(SpecifiedHostname): #TODO Allow multiple endpoints to be entere
     return SpecifiedHostname
 
 # Output endpoint information to console
-def basic_output(r):
+def BasicOutput(r):
     print('')
     status = "Status Code: {} - {}"
     print(status.format(r.status_code,r.json()['result_description']))
