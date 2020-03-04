@@ -1,7 +1,7 @@
 # ApexCentralAPIClient
 Client script for Trend Micro's Apex Central API
 
-Must Create a JSON file containing the Apex Central URL (without the /WebApp), and the Application ID and API Key generated in the Apex Central Web Console.
+Must Create a JSON file (credentials.json) in the same directory as the script containing the Apex Central URL (without the /WebApp), and the Application ID and API Key generated in the Apex Central Web Console.
 Only Admins can generate the Application ID and API Key.
 
 Format for SaaS:
