@@ -1,3 +1,15 @@
+#############################################################
+#  Last Revised: 3/4/2020                                   #
+#  GitHub: https://github.com/eliminat/ApexCentralAPIClient #
+#  Description: API client for the Trend Micro Apex Central #
+#  API.                                                     #
+#                                                           #
+#  Trend Micro's Automation Center:                         #
+#  https://automation.trendmicro.com/apex-central/home      #
+#############################################################
+
+
+
 import jwt
 import hashlib
 import requests
@@ -27,25 +39,27 @@ while choice == '':
     print('Do you want to perform a (Q)uery or an (A)ction? ')
     print('')
     choice = input()
-    print(choice)
+#    print(choice)
     if (choice.lower() != 'q') and (choice.lower() != 'a'):
         choice = ''
 
 if choice.lower() == 'q':
+    # Determine which Query to Run
     useQueryString = QuerySelection()
+
+    # Header information for requests
+    # headers = {'Authorization': 'Bearer ' + jwt_token}
+    headers = GenerateHeaders(useQueryString, useRequestBody, CREDENTIALS, PRODUCTAGENTAPIPATH)
+    
+    # Perform request and store response
+    response = requests.get(CREDENTIALS["URL"] + PRODUCTAGENTAPIPATH + useQueryString, headers=headers, data=useRequestBody, verify=False)
+    # Output to console.
+    BasicOutput(response)
 elif choice.lower() == 'a':
     print('Not yet implemented')
     sys.exit()
 
 
 
-# Header information for requests
-#headers = {'Authorization': 'Bearer ' + jwt_token}
 
-headers = GenerateHeaders(useQueryString, useRequestBody, CREDENTIALS)
 
-#perform request and store response
-response = requests.get(CREDENTIALS["URL"] + PRODUCTAGENTAPIPATH + useQueryString, headers=headers, data=useRequestBody, verify=False)
-
-# Output basic info of endpoint to console.
-BasicOutput(response)

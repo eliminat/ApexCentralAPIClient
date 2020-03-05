@@ -1,3 +1,13 @@
+#############################################################
+#  Last Revised: 3/4/2020                                   #
+#  GitHub: https://github.com/eliminat/ApexCentralAPIClient #
+#  Description: API client for the Trend Micro Apex Central #
+#  API.                                                     #
+#                                                           #
+#  Trend Micro's Automation Center:                         #
+#  https://automation.trendmicro.com/apex-central/home      #
+#############################################################
+
 import base64
 import jwt
 import hashlib
@@ -5,6 +15,8 @@ import requests
 from Crypto.PublicKey import RSA
 import time
 import json
+import os
+import sys
 
 # Create Checksum
 def create_checksum(http_method, raw_url, headers, request_body):
@@ -26,15 +38,18 @@ def create_jwt_token(appication_id, api_key, http_method, raw_url, headers, requ
 # Retrieve credential information from credentials.json
 # TODO Allow specification of JSON file instead of hard-code?
 def GetCredentials():
-    with open('credentials.json', 'r') as f:
-        credentials = json.load(f)
-    return credentials
+    # Verify file exists
+    if os.path.exists ('credentials.json'):
+        with open('credentials.json', 'r') as f:
+            credentials = json.load(f)
+        return credentials
+    else:
+        print('Unable to retrieve credentials. credentials.json does not exist.')
+        sys.exit()
 
 # Generate Headers for requests
-def GenerateHeaders(useQueryString, useRequestBody, credentials):
+def GenerateHeaders(useQueryString, useRequestBody, credentials, productAgentAPIPath):
 
-        # This is the path for ProductAgents API
-        productAgentAPIPath = '/WebApp/API/AgentResource/ProductAgents'
         # currently Canonical-Request-Headers will always be empty
         canonicalRequestHeaders = ''
 

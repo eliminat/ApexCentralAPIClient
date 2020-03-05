@@ -1,3 +1,13 @@
+#############################################################
+#  Last Revised: 3/4/2020                                   #
+#  GitHub: https://github.com/eliminat/ApexCentralAPIClient #
+#  Description: API client for the Trend Micro Apex Central #
+#  API.                                                     #
+#                                                           #
+#  Trend Micro's Automation Center:                         #
+#  https://automation.trendmicro.com/apex-central/home      #
+#############################################################
+
 import json
 
 # Get endpoint name from console
@@ -16,7 +26,12 @@ def BasicOutput(r):
     print('')
     status = "Status Code: {} - {}"
     print(status.format(r.status_code,r.json()['result_description']))
-    print(r.json()['result_content'])  #TODO Break-down results from the JSON output.
+    #print(r.json()['result_content'])  #TODO Break-down results from the JSON output.
+
+    # Format JSON list output then print to console
+    json_formatted_str = json.dumps(r.json()['result_content'], indent=2)
+    print(json_formatted_str)
+
     print('')
 
 # Prompt for what type of query should be performed.
@@ -51,3 +66,7 @@ def GetEndpointInfo():
 # QueryString for requesting a list of all Apex One endpoints
 def GetApexOneEndpoints():
     return '?product=SLF_PRODUCT_OFFICESCAN_CE'
+
+# Specify action to be done
+#def ActionSelection():
+    #TODO implement actions
