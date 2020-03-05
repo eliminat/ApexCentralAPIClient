@@ -47,8 +47,8 @@ def GetCredentials():
         print('Unable to retrieve credentials. credentials.json does not exist.')
         sys.exit()
 
-# Generate Headers for requests
-def GenerateHeaders(useQueryString, useRequestBody, credentials, productAgentAPIPath):
+# Generate Headers for Query
+def GenerateQueryHeaders(useQueryString, useRequestBody, credentials, productAgentAPIPath):
 
         # currently Canonical-Request-Headers will always be empty
         canonicalRequestHeaders = ''
@@ -57,4 +57,17 @@ def GenerateHeaders(useQueryString, useRequestBody, credentials, productAgentAPI
         jwt_token = create_jwt_token(credentials["Application ID"], credentials["APIKey"], 'GET',
                               productAgentAPIPath + useQueryString,
                               canonicalRequestHeaders, useRequestBody, iat=time.time())
-        return {'Authorization': 'Bearer ' + jwt_token}
+        return {'Authorization': 'Bearer ' + jwt_token, 'Content-Type': 'application/json;charset=utf-8'}
+
+
+# Generate Headers for Action
+def GenerateActionHeaders(useQueryString, useRequestBody, credentials, productAgentAPIPath):
+
+        # currently Canonical-Request-Headers will always be empty
+        canonicalRequestHeaders = ''
+
+
+        jwt_token = create_jwt_token(credentials["Application ID"], credentials["APIKey"], 'POST',
+                              productAgentAPIPath + useQueryString,
+                              canonicalRequestHeaders, useRequestBody, iat=time.time())
+        return {'Authorization': 'Bearer ' + jwt_token, 'Content-Type': 'application/json;charset=utf-8'}

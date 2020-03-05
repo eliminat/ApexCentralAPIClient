@@ -49,16 +49,25 @@ if choice.lower() == 'q':
 
     # Header information for requests
     # headers = {'Authorization': 'Bearer ' + jwt_token}
-    headers = GenerateHeaders(useQueryString, useRequestBody, CREDENTIALS, PRODUCTAGENTAPIPATH)
+    headers = GenerateQueryHeaders(useQueryString, useRequestBody, CREDENTIALS, PRODUCTAGENTAPIPATH)
     
     # Perform request and store response
     response = requests.get(CREDENTIALS["URL"] + PRODUCTAGENTAPIPATH + useQueryString, headers=headers, data=useRequestBody, verify=False)
     # Output to console.
     BasicOutput(response)
-elif choice.lower() == 'a':
-    print('Not yet implemented')
-    sys.exit()
 
+elif choice.lower() == 'a':
+    # Determine which Action to Run
+    useRequestBody = ActionSelection()
+
+    # Header information for requests
+    # headers = {'Authorization': 'Bearer ' + jwt_token, 'Content-Type': 'application/json;charset=utf-8')}
+    headers = GenerateActionHeaders(useQueryString, useRequestBody, CREDENTIALS, PRODUCTAGENTAPIPATH)
+    
+    # Perform request and store response
+    response = requests.post(CREDENTIALS["URL"] + PRODUCTAGENTAPIPATH + useQueryString, headers=headers, data=useRequestBody, verify=False)
+    # Output to console.
+    BasicOutput(response)
 
 
 

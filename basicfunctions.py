@@ -9,6 +9,7 @@
 #############################################################
 
 import json
+import sys
 
 # Get endpoint name from console
 def GetEndpoint(): #TODO Allow multiple endpoints to be entered into an array
@@ -17,7 +18,7 @@ def GetEndpoint(): #TODO Allow multiple endpoints to be entered into an array
         print("Provide endpoint name: ")
         SpecifiedHostname = input() #TODO Add input checking/verification
     confirmation = 'The Hostname \"{}\" was provided'
-    print('')
+    print('') 
     print(confirmation.format(SpecifiedHostname))
     return SpecifiedHostname
 
@@ -68,5 +69,59 @@ def GetApexOneEndpoints():
     return '?product=SLF_PRODUCT_OFFICESCAN_CE'
 
 # Specify action to be done
-#def ActionSelection():
-    #TODO implement actions
+def ActionSelection():
+    print('')
+    print('What would you like to do?')
+
+
+    choice = ''
+    while choice == '':
+        print('1) Isolate an endpoint')
+        print('2) Restore an isolated endpoint')
+        print("3) Relocate an endpoint")
+        print('4) Uninstall the Security Agent from an Endpoint')
+        print('5) Quit')
+        print('')
+        
+        choice = input()
+        try:
+            if int(choice) < 0 or int(choice) > 5:
+                choice = ''
+                break
+        except:
+            choice = ''
+    
+    
+    
+    # Choice options are temporary filler for validation
+    # Choice 1 - Isolate Endpoint
+    
+    if choice == '1':
+        SpecifiedEndpoint = GetEndpoint()
+        print('')
+        payload = {
+            "host_name":SpecifiedEndpoint,
+            "act":"cmd_isolate_agent",
+            "allow_multiple_match":False
+        }
+        return json.dumps(payload)
+    elif choice == '2':
+        SpecifiedEndpoint = GetEndpoint()
+        print('')
+        payload = {
+            "host_name":SpecifiedEndpoint,
+            "act":"cmd_restore_isolated_agent",
+            "allow_multiple_match":False
+        }
+        return json.dumps(payload)
+    elif choice == '3':
+        SpecifiedEndpoint = GetEndpoint()
+        print('Choice is 3')
+        sys.exit()
+    elif choice == '4':
+        SpecifiedEndpoint = GetEndpoint()
+        print('Choice is 4')
+        sys.exit()
+    elif choice == '5':
+        print('Choice is 5')
+        sys.exit()
