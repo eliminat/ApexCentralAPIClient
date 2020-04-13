@@ -1,5 +1,5 @@
 #############################################################
-#  Last Revised: 3/4/2020                                   #
+#  Last Revised: 4/8/2020                                   #
 #  GitHub: https://github.com/eliminat/ApexCentralAPIClient #
 #  Description: API client for the Trend Micro Apex Central #
 #  API.                                                     #
@@ -21,6 +21,18 @@ def GetEndpoint(): #TODO Allow multiple endpoints to be entered into an array
     print('') 
     print(confirmation.format(SpecifiedHostname))
     return SpecifiedHostname
+
+# Get new location from console
+#TODO Need to clarify what to specify for the location
+def GetLocation():
+    SpecifiedLocation = ''
+    while SpecifiedLocation == '':
+        print("Provide new location path: ")
+        SpecifiedLocation = input() #TODO Add input checking/verification
+    confirmation = 'The location \"{}\" was provided'
+    print('') 
+    print(confirmation.format(SpecifiedLocation))
+    return SpecifiedLocation
 
 # Output endpoint information to console
 def BasicOutput(r):
@@ -105,6 +117,8 @@ def ActionSelection():
             "allow_multiple_match":False
         }
         return json.dumps(payload)
+
+    # Choice 2 - Restore an isolated endpoint
     elif choice == '2':
         SpecifiedEndpoint = GetEndpoint()
         print('')
@@ -114,14 +128,34 @@ def ActionSelection():
             "allow_multiple_match":False
         }
         return json.dumps(payload)
+
+    # Choice 3 - Relocate an endpoint
     elif choice == '3':
         SpecifiedEndpoint = GetEndpoint()
-        print('Choice is 3')
-        sys.exit()
+        SpecifiedLocation = GetLocation()
+        print('')
+        payload = {
+            "host_name":SpecifiedEndpoint,
+            "act":"cmd_relocate_agent",
+            "allow_multiple_match":False,
+            "relocate_to_folder_path":SpecifiedLocation
+        }
+        return json.dumps(payload)
+
+    # Choice 4 - Uninstall an agent on an endpoint
     elif choice == '4':
         SpecifiedEndpoint = GetEndpoint()
-        print('Choice is 4')
-        sys.exit()
+        payload = {
+            "host_name":SpecifiedEndpoint,
+            "allow_multiple_match":False,
+            "act":"cmd_uninstall_agent"
+        }
+        command_sent = 'Command to uninstall \"{}\" has been sent.'
+        print('') 
+        print(command_sent.format(SpecifiedEndpoint))
+        return json.dumps(payload)
+
+    # Choice 5 - Exit
     elif choice == '5':
         print('Choice is 5')
         sys.exit()

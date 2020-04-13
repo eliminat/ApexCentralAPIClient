@@ -1,5 +1,7 @@
+#!/usr/bin/python
+
 #############################################################
-#  Last Revised: 3/4/2020                                   #
+#  Last Revised: 4/8/2020                                   #
 #  GitHub: https://github.com/eliminat/ApexCentralAPIClient #
 #  Description: API client for the Trend Micro Apex Central #
 #  API.                                                     #
@@ -12,7 +14,7 @@
 
 import jwt
 import hashlib
-import requests
+import requests.adapters
 import time
 import json
 import urllib3
